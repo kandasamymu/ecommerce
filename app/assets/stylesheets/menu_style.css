@@ -1,0 +1,51 @@
+.Section_Category{
+  font-size: 16px;
+  margin: 0;
+  padding-right: 5px;
+}
+.Section_Table{
+  margin-left: 10px;
+  border-collapse: collapse;
+  width: 90%;
+}
+.Section_MenuItems{
+  margin-top: 10px;
+}
+.Section_MenuItems > td{
+  padding: 10px;
+}
+.Section_MenuItems > :nth-child(2){
+  padding: 8px;
+  min-width: 50px;
+
+}
+.Section_MenuItems > .menu-action-button{
+  min-width: 13px;
+  cursor: pointer;
+
+}
+.Section_MenuItems > .add-to-cart-button{
+  min-width: 80px;
+  cursor: pointer;
+}
+
+.Section_MenuItems:hover , td:hover{
+  border-bottom: 1px solid #279b2777;
+}
+.Section_MenuItems > td > span{
+  font-size: 14px;
+  color: grey;
+}
+.Section_Description{
+  font-size: 12px;
+  text-overflow: clip;
+  font-weight: 200;
+}
+.Section_Category_input{
+  width: 50%;
+  height: 20px;
+  margin: 1px;
+}
+.hideElement{
+  display: none;
+}

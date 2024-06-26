@@ -1,0 +1,14 @@
+<article>
+  <section class ="Section">
+    <h2 class="Section_Title"> <%= "#{t("header.welcome")} #{current_user.first_name}!" %></h2>
+  </section>
+  <table class="Section_Table">
+    <% @users.each do |user| %>
+      <tr class="Section_Products  Purple-Text">
+        <td><%= user.first_name %></td>
+        <td><%= user.email %></td>
+        <td class ="red-Text pointer"  >login-as(<%= user.first_name %>)</td>
+      </tr>
+    <% end %>
+  </table>
+</article>

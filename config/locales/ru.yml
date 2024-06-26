@@ -1,0 +1,44 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ru:
+  header:
+    name: "Электронная"
+    sign_out: "выход"
+    create_users: "создавать-пользователей"
+    my_orders: "мои заказы"
+    open_orders: "открытые ордера"
+    welcome: "добро пожаловать"
+  feature:
+    create_new_user: "создать нового пользователя"
+    register_here: "зарегистрироваться здесь"
+    create: "Создавать"
+  home:
+    new_user: "Впервые в Электронная?"
+    sign_up: "Регистрация для новой учетной записи"
+    already_have_account: "У вас уже есть аккаунт?"
+    sign_in: "Войти"
+  products:
+    menu_list: "Список меню"
+    search: "поиск"
+    search_placeholder: "Поищи здесь.."
+    check_out: "Проверить"
+    add_to_cart: "добавить в "

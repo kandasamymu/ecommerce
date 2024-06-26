@@ -1,0 +1,43 @@
+<article>
+  <%= form_tag request_register_path, method: :POST, class: "Section" do %>
+    <h2 class="Section_Title"><%= "#{t("header.welcome")}!!" %> <%= isAdmin ? "#{current_user.first_name}!! #{t("feature.create_new_user")}" : t("feature.register_here") %> </h2>
+    <% if @user.errors.any? %>
+    <div id="error_explanation">
+        <% @user.errors.full_messages.each do |msg| %>
+          <p class="error_message"><%= msg %></p>
+        <% end %>
+    </div>
+    <% end %>
+    <% flash.each do |type, msg| %>
+      <p class="success_message"><%= msg %></p>
+    <% end %>
+    <% if isAdmin %>
+    <div class ="input_box">
+      <%= label_tag(:role, "Select Role", options = { class: "input_box-label" }) %>
+      <%= select_tag(:role, options_for_select([["Admin", $USER_TYPE_ADMIN]], params[:role]), { :class => "input_text-select" }) %>
+    </div>
+    <% end %>
+    <div class ="input_box">
+      <%= label_tag(:first_name, "First Name", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("first_name", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:last_name, "Last Name", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("last_name", value = nil, options = { class: "input_text" }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:email, "Email Address", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("email", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:password, "Password", options = { class: "input_box-label" }) %>
+      <%= password_field_tag("password", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+
+    <div class ="input_box">
+      <%= label_tag(:password_confirmation, "Confirm Password", options = { class: "input_box-label" }) %>
+      <%= password_field_tag("password_confirmation", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <button type="submit" ><%= isAdmin ? t("feature.create") : t("feature.register_here") %></button>
+  <% end %>
+</article>

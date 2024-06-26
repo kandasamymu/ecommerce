@@ -1,0 +1,16 @@
+<article>
+  <section class ="Section row">
+    <h2 class="Section_Title"><%= "#{t("header.welcome")} #{current_user.first_name}!" %></h2>
+  </section>
+  <div class="row ">
+    <h2  class="Section_Title Purple-Text">My Order History</h2>
+  </div>
+</article>
+<% flash.each do |type, msg| %>
+  <% className = type == "Error" ? "error_message" : "success_message" %>
+  <p class=<%= className %>><%= msg %></p>
+<% end %>
+
+<% @orders.each do |order| %>
+  <%= render partial: "order_list_section", locals: { order: order, order_products: order.order_products } %>
+<% end %>

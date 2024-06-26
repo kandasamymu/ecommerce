@@ -1,0 +1,10 @@
+$("#modal-window").find(".modal-content").html("<%= j (render "edit_product_view") %>");
+<% # $("#modal-window").modal(); %>
+$(".overlay").toggleClass("overlay--hidden");
+$("#modal-window").toggleClass("modal--hidden");
+function toggleModal(){
+  $(".overlay").toggleClass("overlay--hidden");
+  $("#modal-window").toggleClass("modal--hidden");
+}
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <title><%= t("header.name") %></title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="overlay overlay--hidden"></div>
+  <main class="Page_main">
+    <section class ="Header">
+      <%= link_to t("header.name"), view_home_path, class: "Header-title", data: { method: :get } %>
+      <div style="flex: 3"></div>
+      <% if isAdmin %>
+        <%= link_to t("header.create_users"), view_register_path, class: "Header-signout", data: { method: :get } %>
+      <% end %>
+      <% if current_user && current_user.role == $USER_TYPE_CLERK %>
+          <%= link_to t("header.open_orders"), view_clerk_open_orders_path, class: "Header-signout", data: { method: :get } %>
+      <% end %>
+      <% if current_user && current_user.id %>
+        <% if current_user.role == $USER_TYPE_CUSTOMER %>
+          <%= link_to t("header.my_orders"), view_orders_path, class: "Header-signout", data: { method: :get } %>
+        <% end %>
+        <%= link_to t("header.sign_out"), request_logout_path, class: "Header-signout", data: { confirm: "Do you want to signout?", method: :delete } %>
+      <% end %>
+    </section>
+    <%= yield %>
+
+    <div class ="row footer" >
+       <%= link_to "English", url_for(locale: :en) %>
+       <%= link_to "Russian", url_for(locale: :ru) %>
+    </div>
+  </main>
+</body>
+</html>
