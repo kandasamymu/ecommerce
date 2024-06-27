@@ -23,15 +23,15 @@
         <% if current_user.role == $USER_TYPE_CUSTOMER %>
           <%= link_to t("header.my_orders"), view_orders_path, class: "Header-signout", data: { method: :get } %>
         <% end %>
-        <%= link_to t("header.sign_out"), request_logout_path, class: "Header-signout", data: { confirm: "Do you want to signout?", method: :delete } %>
+        <%= link_to t("header.sign_out"), request_logout_path, class: "Header-signout", data: { confirm: "Do you want to Signout?", method: :delete } %>
       <% end %>
     </section>
     <%= yield %>
 
-    <div class ="row footer" >
-       <%= link_to "English", url_for(locale: :en) %>
-       <%= link_to "Russian", url_for(locale: :ru) %>
-    </div>
+<!--    <div class ="row footer" >-->
+       <%#= link_to "English", url_for(locale: :en) %>
+       <%#= link_to "Russian", url_for(locale: :ru) %>
+<!--    </div>-->
   </main>
 </body>
 </html>

@@ -22,8 +22,8 @@
 en:
   header:
     name: "Ecommerce"
-    sign_out: "Sign-out"
-    create_users: "Create-users"
+    sign_out: "Sign Out"
+    create_users: "Create Users"
     my_orders: "My Orders"
     open_orders: "Open orders"
     welcome: "Welcome"
@@ -32,13 +32,13 @@ en:
     register_here: "Register Here"
     create: "Create"
   home:
-    new_user: "New to the Ecommerce?"
-    sign_up: "Sign-up for a new account"
-    already_have_account: "Already have a account?"
-    sign_in: "Sign-in"
+    new_user: "New User?"
+    sign_up: "Sign Up"
+    already_have_account: "Existing User?"
+    sign_in: "Sign In"
   products:
     menu_list: "Menu List"
-    search: "search"
-    search_placeholder: "Search here.."
+    search: "Search"
+    search_placeholder: "Search here"
     check_out: "Check Out"
-    add_to_cart: "Add to cart"
+    add_to_cart: "Add to Cart"

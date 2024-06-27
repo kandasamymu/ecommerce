@@ -12,8 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def create_order
-    if params[:client_cart_products] == "" || params[:client_cart_products] == "{}"
-    else
+    if params[:client_cart_products] != "" && params[:client_cart_products] != "{}"
       begin
         client_cart_products = ActiveSupport::JSON.decode(params[:client_cart_products])
         product_ids = client_cart_products.keys

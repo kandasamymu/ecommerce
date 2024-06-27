@@ -32,9 +32,9 @@ ru:
     register_here: "зарегистрироваться здесь"
     create: "Создавать"
   home:
-    new_user: "Впервые в Электронная?"
-    sign_up: "Регистрация для новой учетной записи"
-    already_have_account: "У вас уже есть аккаунт?"
+    new_user: "Новый пользователь?"
+    sign_up: "Зарегистрироваться"
+    already_have_account: "Существующий пользователь?"
     sign_in: "Войти"
   products:
     menu_list: "Список меню"
