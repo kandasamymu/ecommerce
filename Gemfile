@@ -77,5 +77,6 @@ group :development, :test do
   gem 'faker' # For generating fake data
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'rubocop', '1.23'
   gem 'rubocop-rails', require: false
 end

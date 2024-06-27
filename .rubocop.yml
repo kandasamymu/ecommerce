@@ -1,0 +1,12 @@
+# .rubocop.yml
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'bin/*'
+
+Rails:
+  Enabled: true

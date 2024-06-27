@@ -61,18 +61,18 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.cache_store = :mem_cache_store, "localhost", { pool_size: 10, pool_timeout: 5 }
+  config.cache_store = :mem_cache_store, 'localhost', { pool_size: 10, pool_timeout: 5 }
   config.active_job.queue_adapter = :sidekiq
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: "gmail.com",
-    authentication: "plain",
+    domain: 'gmail.com',
+    authentication: 'plain',
     enable_starttls_auto: true,
-    user_name: "kandasamylearn@gmail.com",
-    password: "lbtbonqmgpxobnfl"
+    user_name: 'kandasamylearn@gmail.com',
+    password: 'lbtbonqmgpxobnfl'
   }
 end

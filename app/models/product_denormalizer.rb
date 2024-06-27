@@ -13,25 +13,15 @@ class ProductDenormalizer
       .map { |method_name| [method_name, send(method_name)] }.to_h
   end
 
-  def id
-    product.id
-  end
+  delegate :id, to: :product
 
-  def name
-    product.name
-  end
+  delegate :name, to: :product
 
-  def price
-    product.price
-  end
+  delegate :price, to: :product
 
-  def description
-    product.description
-  end
+  delegate :description, to: :product
 
-  def product_category_id
-    product.product_category_id
-  end
+  delegate :product_category_id, to: :product
 
   def product_category
     { id: product.product_category.id, name: product.product_category.name }

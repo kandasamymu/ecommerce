@@ -16,18 +16,19 @@ class ProductCategoriesController < ApplicationController
     if isAdmin
       redirect_to view_admin_home_path
     elsif current_user && current_user.id
-      render "index"
-    else redirect_to view_welcome_path     end
+      render 'index'
+    else
+      redirect_to view_welcome_path end
   end
 
   def search_product
     search_term = params[:search_term]
     puts search_term
-    puts "start"
+    puts 'start'
     # @products = (Product.search query: { multi_match: { query: search_term, type: "phrase_prefix", fields: %w[name, description, price]} }).results
-    @products = (Product.search(search_term)).results
+    @products = Product.search(search_term).results
     puts @products.to_json
-    puts "end"
+    puts 'end'
     respond_to do |format|
       format.html
       format.js
@@ -58,16 +59,16 @@ class ProductCategoriesController < ApplicationController
         @product_category = ProductCategory.find(params[:product_category_id])
         @product_category.name = params[:menu_name]
         if @product_category.save
-          flash[:notice] = "Product category changes saved successfully!"
+          flash[:notice] = 'Product category changes saved successfully!'
         else
-          flash[:Error] = "Error: Issue in creating the product category!"
+          flash[:Error] = 'Error: Issue in creating the product category!'
         end
-      rescue => exception
-        flash[:Error] = exception.message
+      rescue StandardError => e
+        flash[:Error] = e.message
       end
       redirect_to view_home_path
     else
-      render plain: "Error: 404 Not Authorized"
+      render plain: 'Error: 404 Not Authorized'
     end
   end
 
@@ -76,16 +77,16 @@ class ProductCategoriesController < ApplicationController
       begin
         @product_category = ProductCategory.find(params[:product_category_id])
         if @product_category.destroy
-          flash[:notice] = "Product category deleted successfully!"
+          flash[:notice] = 'Product category deleted successfully!'
         else
-          flash[:Error] = "Error: Issue in deleting the product category!"
+          flash[:Error] = 'Error: Issue in deleting the product category!'
         end
-      rescue => exception
-        flash[:Error] = exception.message
+      rescue StandardError => e
+        flash[:Error] = e.message
       end
       redirect_to view_home_path
     else
-      render plain: "Error: 404 Not Authorized"
+      render plain: 'Error: 404 Not Authorized'
     end
   end
 

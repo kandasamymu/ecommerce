@@ -5,12 +5,13 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   protect_from_forgery with: :null_session
-  $USER_TYPE_CUSTOMER = "customer"
-  $USER_TYPE_ADMIN = "admin"
+  $USER_TYPE_CUSTOMER = 'customer'
+  $USER_TYPE_ADMIN = 'admin'
 
-  $ORDER_STAGES = ["In Cart", "Ordered", "Shipped", "OutForDelivery", "Delivered", "Cancelled"]
+  $ORDER_STAGES = ['In Cart', 'Ordered', 'Shipped', 'OutForDelivery', 'Delivered', 'Cancelled']
 
-  helper_method :current_user_session, :current_user, :isAdmin, :get_all_orders, :get_all_orders_current_user, :get_cart_orders_current_user
+  helper_method :current_user_session, :current_user, :isAdmin, :get_all_orders, :get_all_orders_current_user,
+                :get_cart_orders_current_user
 
   private
 
@@ -29,35 +30,35 @@ class ApplicationController < ActionController::Base
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
+
     @current_user_session = UserSession.find
   end
 
   def isAdmin
     return @isAdmin if defined?(@isAdmin)
+
     @isAdmin = current_user if current_user && current_user.role == $USER_TYPE_ADMIN
   end
 
   def current_user
     return @current_user if defined?(@current_user)
+
     @current_user = current_user_session && current_user_session.user
   end
 
   def get_all_orders
     return @get_all_orders if defined?(@get_all_orders)
+
     if current_user && current_user.role == $USER_TYPE_ADMIN
-      @get_all_orders = Order.order(order_placed_date: :desc).where.not(:order_status => $ORDER_STAGES[0])
+      @get_all_orders = Order.order(order_placed_date: :desc).where.not(order_status: $ORDER_STAGES[0])
     end
   end
 
   def get_all_orders_current_user
-    if current_user
-      @get_all_orders_current_user = current_user.orders.order(order_placed_date: :desc)
-    end
+    @get_all_orders_current_user = current_user.orders.order(order_placed_date: :desc) if current_user
   end
 
   def get_cart_orders_current_user
-    if current_user
-      @get_cart_orders_current_user = current_user.orders.where(:order_placed_date => nil)
-    end
+    @get_cart_orders_current_user = current_user.orders.where(order_placed_date: nil) if current_user
   end
 end

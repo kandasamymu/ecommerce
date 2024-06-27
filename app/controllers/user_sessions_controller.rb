@@ -6,14 +6,13 @@ class UserSessionsController < ApplicationController
       redirect_to view_home_path
     else
       @user_session = UserSession.new
-      render "new"
+      render 'new'
     end
   end
 
   def create
-    if current_user && current_user.id
-      return redirect_to view_home_path
-    end
+    return redirect_to view_home_path if current_user && current_user.id
+
     @user_session = UserSession.new(user_session_params.to_h)
     if @user_session.save
       redirect_to view_home_path
@@ -24,7 +23,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    Rails.cache.clear()
+    Rails.cache.clear
     redirect_to view_welcome_path
   end
 

@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
-  belongs_to :product_category, class_name: "ProductCategory", foreign_key: :product_category_id
-  has_many :order_products, class_name: "OrderProduct", :dependent => :destroy
+  belongs_to :product_category, class_name: 'ProductCategory'
+  has_many :order_products, class_name: 'OrderProduct', dependent: :destroy
   validates :product_category, presence: true
 
   include Elasticsearch::Model
@@ -16,7 +16,7 @@ class Product < ApplicationRecord
         query: {
           multi_match: {
             query: query,
-            type: "phrase_prefix",
+            type: 'phrase_prefix',
             fields: %w[name description]
           }
         }
@@ -30,7 +30,6 @@ class Product < ApplicationRecord
       indexes :name, type: :text, analyzer: 'english'
       indexes :price, type: :float
       indexes :description, type: :text, analyzer: 'english'
-      end
+    end
   end
-
 end

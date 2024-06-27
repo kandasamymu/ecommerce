@@ -9,15 +9,15 @@ class ProductsController < ApplicationController
         product.product_category_id = params[:product_category_id]
 
         if product.save
-          flash[:notice] = "Product Updated Successfully"
+          flash[:notice] = 'Product Updated Successfully'
         else
-          flash[:Error] = "Error occured in updating the product"
+          flash[:Error] = 'Error occured in updating the product'
         end
-      rescue => exception
-        flash[:Error] = exception.message
+      rescue StandardError => e
+        flash[:Error] = e.message
       end
     else
-      flash[:Error] = "Error: 404 Not Authorized"
+      flash[:Error] = 'Error: 404 Not Authorized'
     end
     redirect_to view_home_path
   end
@@ -28,17 +28,17 @@ class ProductsController < ApplicationController
         @product = Product.find(params[:product_id])
         product_category_id = @product.product_category_id
         if @product.destroy
-          flash[:notice] = "Product Deleted successfully!"
+          flash[:notice] = 'Product Deleted successfully!'
         else
-          flash[:Error] = "Error: Issue in deleting the product!"
+          flash[:Error] = 'Error: Issue in deleting the product!'
         end
-      rescue => exception
-        flash[:Error] = exception.message
+      rescue StandardError => e
+        flash[:Error] = e.message
         redirect_to view_home_path
       end
       redirect_to view_home_path
     else
-      render plain: "Error: 404 Not Authorized"
+      render plain: 'Error: 404 Not Authorized'
     end
   end
 
@@ -47,11 +47,11 @@ class ProductsController < ApplicationController
       begin
         product_category_id = params[:product_category_id]
         puts product_category_id
-        if product_category_id == "Others"
-          @product_category = ProductCategory.new(:name => params[:new_product_category_name])
+        if product_category_id == 'Others'
+          @product_category = ProductCategory.new(name: params[:new_product_category_name])
           if @product_category.save
           else
-            flash[:Error] = "Error: Issue in creating the product category!"
+            flash[:Error] = 'Error: Issue in creating the product category!'
             redirect_to view_home_path
           end
         else
@@ -59,21 +59,22 @@ class ProductsController < ApplicationController
         end
 
         if @product_category && @product_category.id
-          @product = @product_category.products.new(:name => params[:name], :price => params[:price], :description => params[:description])
+          @product = @product_category.products.new(name: params[:name], price: params[:price],
+                                                    description: params[:description])
           if @product.save
-            flash[:notice] = "Products changes saved successfully!"
+            flash[:notice] = 'Products changes saved successfully!'
           else
-            flash[:Error] = "Error: Product Category Not Found!"
+            flash[:Error] = 'Error: Product Category Not Found!'
           end
         else
-          flash[:Error] = "Error: Product Category Not Found!"
+          flash[:Error] = 'Error: Product Category Not Found!'
         end
-      rescue => exception
-        flash[:Error] = exception.message
+      rescue StandardError => e
+        flash[:Error] = e.message
       end
       redirect_to view_home_path
     else
-      render plain: "Error: 404 Not Authorized"
+      render plain: 'Error: 404 Not Authorized'
     end
   end
 end

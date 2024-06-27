@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     if current_user && current_user.id
       redirect_to view_home_path
     else
-      render "index"
+      render 'index'
     end
   end
 end

@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     @stage = params[:current_stage]
     puts "--------------------#{@order_id}"
     puts "--------------------#{@stage}"
-    mail(to: @user.email, subject: "Ecommerce! Order Update")
+    mail(to: @user.email, subject: 'Ecommerce! Order Update')
   end
 
   def send_order_create_mail(params)
@@ -14,6 +14,6 @@ class UserMailer < ApplicationMailer
     @stage = params[:current_stage]
     puts "--------------------#{@order_id}"
     puts "--------------------#{@stage}"
-    mail(to: @user.email, subject: "Ecommerce! Order Placed")
+    mail(to: @user.email, subject: 'Ecommerce! Order Placed')
   end
 end
