@@ -1,0 +1,78 @@
+<html>
+<head>
+<style>
+table.minimalistBlack {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.minimalistBlack td, table.minimalistBlack th {
+  padding: 5px 4px;
+}
+table.minimalistBlack tbody td {
+  font-size: 13px;
+  color: #000000;
+}
+table.minimalistBlack thead {
+  background: #e7e7e7;
+  border-bottom: 2px solid  rgb(112, 12, 112);
+
+}
+table.minimalistBlack thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(112, 12, 112);
+  text-align: left;
+}
+table.minimalistBlack tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(112, 12, 112);
+}
+table.minimalistBlack tfoot td {
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+<article>
+  <section class ="Section row">
+    <h2 class="section-title">My Cart!</h2>
+  </section>
+  <% if @get_cart_order_products_with_calculated_price["order_products"] != [] %>
+    <table class="minimalistBlack">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td>Total</td>
+          <td><%= @get_cart_order_products_with_calculated_price["total_price"] %></td>
+        </tr>
+      </tfoot>
+        <tbody>
+        <% @get_cart_order_products_with_calculated_price["order_products"] != [] && @get_cart_order_products_with_calculated_price["order_products"].each do |order_product| %>
+        <tr>
+          <td><%= order_product.product_name %> </td><td><%= order_product.product_price %></td><td><%= order_product.product_quantity %></td>
+        </tr>
+        <% end %>
+      </tbody>
+      </tr>
+    </table>
+    <div class="row" style ="justify-content: flex-end;" >
+      <%= form_tag request_change_order_status_path, method: :post do %>
+        <input type="hidden" name="order_id" value ="<%= @get_cart_order_products_with_calculated_price["order_products"][0].order_id %>" />
+        <button type="submit" class="button-small " style="flex:">Place Order</button>
+      <% end %>
+    </div>
+  <% else %>
+    <p>Cart is empty!</p>
+  <% end %>
+</article>
+</body>
+</html>

@@ -1,0 +1,45 @@
+
+<table class="section-table">
+  <% products.each do |product| %>
+    <tr class="Section_Products  Green-Text_Light">
+      <td>
+        <div>
+          <%= product.name %><br/>
+          <div class="Section_Description"><%= product.description %></div>
+        </div>
+      </td>
+      <td>: &#8377;<%= product.price %></td>
+      <% if admin? %>
+        <td class="menu-action-button" >
+          <%= form_tag view_edit_product_path, method: :POST, :remote => true do %>
+            <input type="hidden" name ="product_id" value="<%= product.id %>" />
+            <input type="hidden" name ="product_category_id" value="<%= product.product_category.id %>" />
+            <input type="hidden" name ="product_category_name" value="<%= product.product_category.name %>" />
+            <input type="image" src=<%= asset_path("edit-icon.png") %>  width="18" height="18">
+          <% end %>
+        </td>
+        <td class="menu-action-button" >
+          <%= form_tag request_delete_product_path, method: :DELETE do %>
+            <input type="hidden" name ="product_id" value=<%= product.id %> />
+            <input type="image" src=<%= asset_path("trash-can.png") %>  width="18" height="18">
+          <% end %>
+        </td>
+      <% else %>
+
+        <td id =<%= "AddToCartButton_#{product.id}" %> class="add-to-cart-button <%= "AddToCartButton_#{product.id}" %> <%= get_cart_order_products[product.id.to_i] == nil ? "" : "hideElement" %>" >
+            <button class = "button-small " onclick = "addToCart(event)" data-id =<%= product.id.to_i %> ><%= t("products.add_to_cart") %></button>
+        </td>
+        <td id=<%= "CartActionButtons_#{product.id}" %>  class="row  <%= "CartActionButtons_#{product.id.to_i}" %> <%= get_cart_order_products[product.id.to_i] == nil ? "hideElement" : "" %>" >
+            <input type="image" src=<%= asset_path("icon-minus.png") %>  data-id =<%= product.id.to_i %> onclick ="removeOrderProduct(event)"    width="18" height="18">
+            <div class ="sized-box"> </div>
+              <span id=<%= "cart_item_quantity_box_#{product.id}" %> class="<%= "cart_item_quantity_box_#{product.id}" %>" >  <%= get_cart_order_products[product.id.to_i] %>  </span>
+            <div class ="sized-box"> </div>
+            <input type="image" src=<%= asset_path("icon-plus.png") %> data-id =<%= product.id %> onclick ="addOrderProduct(event)"   width="18" height="18">
+          </div>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+

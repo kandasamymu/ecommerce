@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="model_styles.css">
+  </head>
+  <body>
+      <article>
+        <section class ="Section row">
+          <h2 class="section-title"><%= "#{t("header.welcome")} #{@current_user.first_name}!" %></h2>
+          <% if !admin? %>
+            <div style="margin-left:auto;">
+              <%= form_tag request_create_order_product_path, method: :post do %>
+                <input type="hidden" name="client_cart_products" id="client_cart_products" value ="" />
+                <button type="submit" class="button-small button-yellow" style="flex:"><%= t("products.check_out") %></button>
+              <% end %>
+            </div>
+          <% end %>
+        </section>
+        <div class="row ">
+          <h2  class="section-title Purple-Text"><%= t("products.product_list") %></h2>
+          <% if admin? %>
+            <%= form_tag view_create_product_path, method: :GET, :remote => true do %>
+              <button type="submit" class="button-small">Create Menu</button>
+            <% end %>
+          <% end %>
+        </div>
+      </article>
+
+      <% if (@product_category && @product_category.errors.any?) || (@product && @product.errors.any?) %>
+      <div id="error_explanation">
+          <% @product_category.errors.full_messages.each do |msg| %>
+            <p class="error_message"><%= msg %></p>
+          <% end %>
+          <% @product.errors.full_messages.each do |msg| %>
+            <p class="error_message"><%= msg %></p>
+          <% end %>
+      </div>
+      <% end %>
+      <% flash.each do |type, msg| %>
+        <% className = type == "Error" ? "error_message" : "success_message" %>
+        <p class=<%= className %>><%= msg %></p>
+      <% end %>
+      <%= form_tag request_search_product_path, method: :PUT, class: "Section row", :remote => true do %>
+          <div class ="input_box">
+              <%= text_field_tag("search_term", value = nil, options = { class: "input_text ", placeholder: t("products.search_placeholder") }) %>
+          </div>
+          <button type="submit" class="button-small button-yellow" style="margin-left:20px"><%= t("products.search") %> </button>
+      <% end %>
+      <% @product_categories.each do |product_category| %>
+        <% if product_category.products.size > 0 %>
+          <section class="Section products_full_list">
+            <div class="row row-bottom">
+              <h3 id =<%= "#{product_category.id}_h2" %> class="Section_Category Green-Text "><%= product_category.name %></h3>
+              <% if admin? %>
+                <input id=<%= "#{product_category.id}_edit" %> type="image" src=<%= asset_path("edit-icon-1.png") %> data-id=<%= product_category.id %> onclick="changeh2toInputTag(event)" width="18" height="18">
+                <div class ="sized-box"> </div>
+                <%= form_tag request_edit_product_category_path, method: :POST do %>
+                  <input type="hidden" name ="menu_id" value=<%= product_category.id %> />
+                  <input id=<%= "#{product_category.id}_input" %> type="text" name="menu_name" class="section-category  Section_Category_input Green-Text hideElement" value="<%= product_category.name %>"  />
+                  <input id=<%= "#{product_category.id}_save" %> type="submit" class="button-small hideElement" value="save" />
+                  <input id=<%= "#{product_category.id}_cancel" %> type="button" class="button-small hideElement" value="cancel" data-id=<%= product_category.id %> onclick="changeInputToH2Tag(event)" />
+                <% end %>
+                <%= form_tag request_delete_product_category_path, method: :DELETE, data: { confirm: "Do you want to delete menu category?" } do %>
+                  <input type="hidden" name ="menu_id" value=<%= product_category.id %> />
+                  <input  type="image" src=<%= asset_path("trash-can.png") %>  width="12" height="12">
+                <% end %>
+              <% end %>
+            </div>
+            <%= render partial: "product_list_section", locals: { products: product_category.products } %>
+          </section>
+        <% end %>
+      <% end %>
+      <section class="Section hideElement" id="searched_products_list"></section>
+
+      <div id="cart_products_from_db" data-source=<%= get_cart_orders_current_user.to_json %>></div>
+      <div id="modal-window" class="modal modal--hidden">
+        <div class="modal-content">
+        </div>
+      </div>
+  </body>
+  <script>
+    $("#search_term")[0].addEventListener("keyup", (event)=>{
+      if(event.target.value!='' ||  event.target.value.length < 3 ){
+        $(".products_full_list").removeClass("hideElement");
+        $("#searched_products_list").addClass("hideElement");
+      }
+    })
+  </script>
+</html>

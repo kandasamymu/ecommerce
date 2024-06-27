@@ -1,0 +1,41 @@
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.overlay--hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.modal--hidden {
+  display: none;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 2rem 4rem;
+  width: 550px;
+}
+
+
+.modal-content #submit:hover {
+  background-color: #204582;
+}
+.modal__close-bar {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -2rem;
+  margin-top: -1rem;
+}

@@ -1,0 +1,30 @@
+<% if admin?%>
+  <div class="modal__close-bar">
+    <span onclick ="toggleModal()">X</span>
+  </div>
+  <%= form_tag request_create_product_path, method: :POST, class: "Section", :remote => true do %>
+    <% product_categories_with_others = @product_categories.map { |product_cat| [product_cat.name, product_cat.id] } %>
+    <% product_categories_with_others.push(["Others", "Others"]) %>
+    <div class ="input_box">
+      <%= label_tag(:product_category_id, "Select Product Category", options = { class: "input_box-label" }) %>
+      <%= select_tag(:product_category_id, options_for_select(product_categories_with_others, params[:product_category_id]), { :class => "input_text-select", :onchange => "onChangeSelectMenuCategoryNameInput(event)" }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:new_product_category_name, "Product Category Name (Required)", options = { class: "input_box-label hideElement", id: "product_category_input_label" }) %>
+      <%= text_field_tag("new_product_category_name", value = nil, options = { class: "input_text hideElement" }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:name, "Product Name", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("name", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:price, "Product Price", options = { class: "input_box-label" }) %>
+      <%= number_field_tag("price", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:description, "Product Description", options = { class: "input_box-label" }) %>
+      <%= text_area_tag("description", value = nil, options = { class: "input_text" }) %>
+    </div>
+    <button type="submit" >Create</button>
+  <% end %>
+<% end %>
