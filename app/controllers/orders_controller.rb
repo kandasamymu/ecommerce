@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   helper_method :get_enabled_stages
 
@@ -18,7 +20,7 @@ class OrdersController < ApplicationController
         product_ids = client_cart_products.keys
         order_id = nil
 
-        if get_cart_orders_current_user && get_cart_orders_current_user.first
+        if get_cart_orders_current_user&.first
           order_id = get_cart_orders_current_user.first.id
         elsif current_user.orders.create(order_status: $ORDER_STAGES[0]) && get_cart_orders_current_user && get_cart_orders_current_user.first
           order_id = get_cart_orders_current_user.first.id
@@ -33,7 +35,7 @@ class OrdersController < ApplicationController
           if client_cart_products[product_id] && client_cart_products[product_id] != 0
             order_product.product_quantity = client_cart_products[product_id]
             existing_order_products_to_be_updated.push(order_product)
-          elsif client_cart_products[product_id] == 0
+          elsif (client_cart_products[product_id]).zero?
             existing_order_products_to_be_deleted.push(order_product.id)
           end
         end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Product < ApplicationRecord
   belongs_to :product_category, class_name: 'ProductCategory'
   has_many :order_products, class_name: 'OrderProduct', dependent: :destroy

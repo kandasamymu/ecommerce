@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductDenormalizer
   attr_reader :product
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index
     if isAdmin || !current_user
@@ -8,8 +10,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts '1111'
-    puts user_params
+    Rails.logger.debug '1111'
+    Rails.logger.debug user_params
     @user = User.new(user_params)
     @user.role = $USER_TYPE_ADMIN
 

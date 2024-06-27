@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CheckOutController < ApplicationController
   helper_method :get_cart_order_products_with_calculated_price
 
@@ -30,7 +32,7 @@ class CheckOutController < ApplicationController
   def get_cart_order_products_with_calculated_price
     if current_user
       @get_cart_order_products_with_calculated_price = { 'total_price' => 0, 'order_products' => [] }
-      if get_cart_orders_current_user && get_cart_orders_current_user.first
+      if get_cart_orders_current_user&.first
         get_cart_orders_current_user.first.order_products.each do |order_product|
           @get_cart_order_products_with_calculated_price['order_products'].push(order_product)
           @get_cart_order_products_with_calculated_price['total_price'] =

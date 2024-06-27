@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class UserSessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def new
-    if current_user && current_user.id
+    if current_user&.id
       redirect_to view_home_path
     else
       @user_session = UserSession.new
@@ -11,7 +13,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    return redirect_to view_home_path if current_user && current_user.id
+    return redirect_to view_home_path if current_user&.id
 
     @user_session = UserSession.new(user_session_params.to_h)
     if @user_session.save

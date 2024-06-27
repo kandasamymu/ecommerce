@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   def update_product
     if isAdmin
@@ -46,7 +48,7 @@ class ProductsController < ApplicationController
     if isAdmin
       begin
         product_category_id = params[:product_category_id]
-        puts product_category_id
+        Rails.logger.debug product_category_id
         if product_category_id == 'Others'
           @product_category = ProductCategory.new(name: params[:new_product_category_name])
           if @product_category.save
@@ -58,7 +60,7 @@ class ProductsController < ApplicationController
           @product_category = ProductCategory.find(product_category_id)
         end
 
-        if @product_category && @product_category.id
+        if @product_category&.id
           @product = @product_category.products.new(name: params[:name], price: params[:price],
                                                     description: params[:description])
           if @product.save

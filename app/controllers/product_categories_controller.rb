@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductCategoriesController < ApplicationController
   helper_method :get_cart_order_products
 
@@ -7,15 +9,14 @@ class ProductCategoriesController < ApplicationController
     @product_categories
 
     if Rails.cache.fetch(:product_categories)
-      @product_categories = Rails.cache.fetch(:product_categories)
     else
       Rails.cache.write(:product_categories, ProductCategory.all.order(name: :asc))
-      @product_categories = Rails.cache.fetch(:product_categories)
     end
+    @product_categories = Rails.cache.fetch(:product_categories)
 
     if isAdmin
       redirect_to view_admin_home_path
-    elsif current_user && current_user.id
+    elsif current_user&.id
       render 'index'
     else
       redirect_to view_welcome_path end
@@ -23,12 +24,12 @@ class ProductCategoriesController < ApplicationController
 
   def search_product
     search_term = params[:search_term]
-    puts search_term
-    puts 'start'
+    Rails.logger.debug search_term
+    Rails.logger.debug 'start'
     # @products = (Product.search query: { multi_match: { query: search_term, type: "phrase_prefix", fields: %w[name, description, price]} }).results
     @products = Product.search(search_term).results
-    puts @products.to_json
-    puts 'end'
+    Rails.logger.debug @products.to_json
+    Rails.logger.debug 'end'
     respond_to do |format|
       format.html
       format.js
@@ -93,7 +94,7 @@ class ProductCategoriesController < ApplicationController
   def get_cart_order_products
     if current_user
       @get_cart_order_products = {}
-      if get_cart_orders_current_user && get_cart_orders_current_user.first
+      if get_cart_orders_current_user&.first
         get_cart_orders_current_user.first.order_products.each do |order_item|
           @get_cart_order_products[order_item.product_id] = order_item.product_quantity
         end
