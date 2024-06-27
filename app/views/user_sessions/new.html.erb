@@ -1,6 +1,6 @@
 <article>
   <%= form_tag request_login_path, method: :post, class: "Section" do %>
-    <h2 class="Section_Title"> <%= t("home.sign_in") %></h2>
+    <h2 class="section-title"> <%= t("home.sign_in") %></h2>
     <% if @user_session.errors.any? %>
     <div id="error_explanation">
         <% @user_session.errors.full_messages.each do |msg| %>

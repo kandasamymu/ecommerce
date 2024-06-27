@@ -24,7 +24,7 @@ en:
     name: "Ecommerce"
     sign_out: "Sign Out"
     create_users: "Create Users"
-    my_orders: "My Orders"
+    my_orders: "Orders"
     open_orders: "Open orders"
     welcome: "Welcome"
   feature:

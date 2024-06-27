@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
+require Rails.root.join('lib/constants.rb')
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
+  include AppConstants
 
   before_action :set_locale
   protect_from_forgery with: :null_session
-  $USER_TYPE_CUSTOMER = 'customer'
-  $USER_TYPE_ADMIN = 'admin'
 
-  $ORDER_STAGES = ['In Cart', 'Ordered', 'Shipped', 'OutForDelivery', 'Delivered', 'Cancelled']
-
-  helper_method :current_user_session, :current_user, :isAdmin, :get_all_orders, :get_all_orders_current_user,
+  helper_method :current_user_session, :current_user, :admin?, :get_all_orders, :get_all_orders_current_user,
                 :get_cart_orders_current_user
 
   private
@@ -36,10 +35,10 @@ class ApplicationController < ActionController::Base
     @current_user_session = UserSession.find
   end
 
-  def isAdmin
-    return @isAdmin if defined?(@isAdmin)
+  def admin?
+    return @is_admin if defined?(@is_admin)
 
-    @isAdmin = current_user if current_user && current_user.role == $USER_TYPE_ADMIN
+    @is_admin = current_user if current_user && current_user.role == USER_TYPE_ADMIN
   end
 
   def current_user
@@ -51,8 +50,8 @@ class ApplicationController < ActionController::Base
   def get_all_orders
     return @get_all_orders if defined?(@get_all_orders)
 
-    if current_user && current_user.role == $USER_TYPE_ADMIN
-      @get_all_orders = Order.order(order_placed_date: :desc).where.not(order_status: $ORDER_STAGES[0])
+    if current_user && current_user.role == USER_TYPE_ADMIN
+      @get_all_orders = Order.order(order_placed_date: :desc).where.not(order_status: ORDER_STAGES[0])
     end
   end
 

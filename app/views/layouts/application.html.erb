@@ -9,21 +9,21 @@
 </head>
 <body>
   <div class="overlay overlay--hidden"></div>
-  <main class="Page_main">
+  <main class="page-main">
     <section class ="Header">
       <%= link_to t("header.name"), view_home_path, class: "Header-title", data: { method: :get } %>
       <div style="flex: 3"></div>
-      <% if isAdmin %>
-        <%= link_to t("header.create_users"), view_register_path, class: "Header-signout", data: { method: :get } %>
+      <% if admin? %>
+        <%= link_to t("header.create_users"), view_register_path, class: "header-signout", data: { method: :get } %>
       <% end %>
-      <% if current_user && current_user.role == $USER_TYPE_CLERK %>
-          <%= link_to t("header.open_orders"), view_clerk_open_orders_path, class: "Header-signout", data: { method: :get } %>
+      <% if current_user && current_user.role == AppConstants::USER_TYPE_ADMIN %>
+          <%= link_to t("header.open_orders"), view_admin_open_orders_path, class: "header-signout", data: { method: :get } %>
       <% end %>
       <% if current_user && current_user.id %>
-        <% if current_user.role == $USER_TYPE_CUSTOMER %>
-          <%= link_to t("header.my_orders"), view_orders_path, class: "Header-signout", data: { method: :get } %>
+        <% if current_user.role == AppConstants::USER_TYPE_CUSTOMER %>
+          <%= link_to t("header.my_orders"), view_orders_path, class: "header-signout", data: { method: :get } %>
         <% end %>
-        <%= link_to t("header.sign_out"), request_logout_path, class: "Header-signout", data: { confirm: "Do you want to Signout?", method: :delete } %>
+        <%= link_to t("header.sign_out"), request_logout_path, class: "header-signout", data: { confirm: "Do you want to Signout?", method: :delete } %>
       <% end %>
     </section>
     <%= yield %>

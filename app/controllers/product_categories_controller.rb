@@ -14,7 +14,7 @@ class ProductCategoriesController < ApplicationController
     end
     @product_categories = Rails.cache.fetch(:product_categories)
 
-    if isAdmin
+    if admin?
       redirect_to view_admin_home_path
     elsif current_user&.id
       render 'index'
@@ -55,7 +55,7 @@ class ProductCategoriesController < ApplicationController
   end
 
   def edit_product_category
-    if isAdmin
+    if admin?
       begin
         @product_category = ProductCategory.find(params[:product_category_id])
         @product_category.name = params[:menu_name]
@@ -74,7 +74,7 @@ class ProductCategoriesController < ApplicationController
   end
 
   def destroy
-    if isAdmin
+    if admin?
       begin
         @product_category = ProductCategory.find(params[:product_category_id])
         if @product_category.destroy

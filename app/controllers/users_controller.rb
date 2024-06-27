@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    if isAdmin || !current_user
+    if admin? || !current_user
       @user = User.new
       render 'index'
     else
@@ -13,12 +13,12 @@ class UsersController < ApplicationController
     Rails.logger.debug '1111'
     Rails.logger.debug user_params
     @user = User.new(user_params)
-    @user.role = $USER_TYPE_ADMIN
+    @user.role = USER_TYPE_ADMIN
 
-    @user.role = if user_params[:role] == $USER_TYPE_ADMIN
+    @user.role = if user_params[:role] == USER_TYPE_ADMIN
                    user_params[:role]
                  else
-                   $USER_TYPE_CUSTOMER
+                   USER_TYPE_CUSTOMER
                  end
 
     if @user.save
@@ -31,12 +31,7 @@ class UsersController < ApplicationController
 
   private
 
-  # def user_params
-  #   params.permit(:first_name, :last_name, :email, :password, :role, :password_confirmation, :persistence_token)
-  #   # params.permit(:first_name, :last_name, :email, :password, :role, :password_confirmation)
-  # end
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role,
-                                 :persistence_token)
+    params.permit(:first_name, :last_name, :email, :password, :role, :password_confirmation)
   end
 end

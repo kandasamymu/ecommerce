@@ -1,5 +1,5 @@
 
-<table class="Section_Table">
+<table class="section-table">
   <% products.each do |product| %>
     <tr class="Section_Products  Green-Text_Light">
       <td>
@@ -9,7 +9,7 @@
         </div>
       </td>
       <td>: &#8377;<%= product.price %></td>
-      <% if isAdmin %>
+      <% if admin? %>
         <td class="menu-action-button" >
           <%= form_tag view_edit_product_path, method: :POST, :remote => true do %>
             <input type="hidden" name ="product_id" value="<%= product.id %>" />

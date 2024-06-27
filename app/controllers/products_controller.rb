@@ -2,7 +2,7 @@
 
 class ProductsController < ApplicationController
   def update_product
-    if isAdmin
+    if admin?
       begin
         product = Product.find(params[:product_id])
         product.name = params[:name]
@@ -25,10 +25,10 @@ class ProductsController < ApplicationController
   end
 
   def delete_product
-    if isAdmin
+    if admin?
       begin
         @product = Product.find(params[:product_id])
-        product_category_id = @product.product_category_id
+        # product_category_id = @product.product_category_id
         if @product.destroy
           flash[:notice] = 'Product Deleted successfully!'
         else
@@ -45,14 +45,13 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if isAdmin
+    if admin?
       begin
         product_category_id = params[:product_category_id]
         Rails.logger.debug product_category_id
         if product_category_id == 'Others'
           @product_category = ProductCategory.new(name: params[:new_product_category_name])
-          if @product_category.save
-          else
+          unless @product_category.save
             flash[:Error] = 'Error: Issue in creating the product category!'
             redirect_to view_home_path
           end

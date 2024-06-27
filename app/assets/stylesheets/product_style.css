@@ -1,38 +1,38 @@
-.Section_Category{
+.section-category{
   font-size: 16px;
   margin: 0;
   padding-right: 5px;
 }
-.Section_Table{
+.section-table{
   margin-left: 10px;
   border-collapse: collapse;
   width: 90%;
 }
-.Section_MenuItems{
+.section-products{
   margin-top: 10px;
 }
-.Section_MenuItems > td{
+.section-products > td{
   padding: 10px;
 }
-.Section_MenuItems > :nth-child(2){
+.section-products > :nth-child(2){
   padding: 8px;
   min-width: 50px;
 
 }
-.Section_MenuItems > .menu-action-button{
+.section-products > .menu-action-button{
   min-width: 13px;
   cursor: pointer;
 
 }
-.Section_MenuItems > .add-to-cart-button{
+.section-products > .add-to-cart-button{
   min-width: 80px;
   cursor: pointer;
 }
 
-.Section_MenuItems:hover , td:hover{
+.section-products:hover , td:hover{
   border-bottom: 1px solid #279b2777;
 }
-.Section_MenuItems > td > span{
+.section-products > td > span{
   font-size: 14px;
   color: grey;
 }

@@ -13,8 +13,9 @@ class CheckOutController < ApplicationController
     begin
       order = Order.find(order_id)
       if order
-        order.order_status = $ORDER_STAGES[1]
-        order.order_placed_date = Date.today
+        order.order_status = ORDER_STAGES[1]
+        # order.order_placed_date = Date.today
+        order.order_placed_date = Time.zone.today
         if !order.save
           flash[:Error] = 'Error: Not able to place the order.. Please try again!'
         else

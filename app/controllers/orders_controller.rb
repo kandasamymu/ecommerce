@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
 
         if get_cart_orders_current_user&.first
           order_id = get_cart_orders_current_user.first.id
-        elsif current_user.orders.create(order_status: $ORDER_STAGES[0]) && get_cart_orders_current_user && get_cart_orders_current_user.first
+        elsif current_user.orders.create(order_status: ORDER_STAGES[0]) && get_cart_orders_current_user && get_cart_orders_current_user.first
           order_id = get_cart_orders_current_user.first.id
         end
 
@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
   def get_enabled_stages(stage)
     enabled_stages = []
     flag = false
-    $ORDER_STAGES.each do |curr_stage|
+    ORDER_STAGES.each do |curr_stage|
       enabled_stages.push([curr_stage, curr_stage]) if flag
       flag = true if curr_stage == stage
     end
