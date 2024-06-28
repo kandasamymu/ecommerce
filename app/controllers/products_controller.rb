@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
         flash[:Error] = e.message
       end
     else
-      flash[:Error] = 'Error: 404 Not Authorized'
+      flash[:Error] = 'Error: Not Authorized'
     end
     redirect_to view_home_path
   end
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
       end
       redirect_to view_home_path
     else
-      render plain: 'Error: 404 Not Authorized'
+      render plain: 'Error: Not Authorized'
     end
   end
 
@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
       end
       redirect_to view_home_path
     else
-      render plain: 'Error: 404 Not Authorized'
+      render plain: 'Error: Not Authorized'
     end
   end
 end

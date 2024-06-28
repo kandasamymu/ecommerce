@@ -30,19 +30,3 @@ function changeInputToH2Tag(event){
   menuInput.classList.add("hideElement")
   saveButton.classList.add("hideElement")
 }
-
-function onChangeSelectProductCategoryNameInput(event){
-  var value = event.target.value
-  productCategoryNameInputElement = document.querySelector('#new_product_category_name')
-  productCategoryNameInputLabelElement = document.querySelector('#product_category_input_label')
-  if (value === "Others" && productCategoryNameInputElement.classList.contains("hideElement")){
-    productCategoryNameInputElement.classList.remove("hideElement")
-    productCategoryNameInputLabelElement.classList.remove("hideElement")
-  }else if (!productCategoryNameInputElement.classList.contains("hideElement")){
-    productCategoryNameInputElement.classList.add("hideElement")
-    productCategoryNameInputLabelElement.classList.add("hideElement")
-  }
-  };
-
-
-

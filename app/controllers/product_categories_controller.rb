@@ -6,13 +6,9 @@ class ProductCategoriesController < ApplicationController
   def index
     @product_category = ProductCategory.new
     @product = Product.new
-    @product_categories
-
-    if Rails.cache.fetch(:product_categories)
-    else
+    @product_categories = Rails.cache.fetch(:product_categories) do
       Rails.cache.write(:product_categories, ProductCategory.all.order(name: :asc))
     end
-    @product_categories = Rails.cache.fetch(:product_categories)
 
     if admin?
       redirect_to view_admin_home_path
@@ -69,7 +65,7 @@ class ProductCategoriesController < ApplicationController
       end
       redirect_to view_home_path
     else
-      render plain: 'Error: 404 Not Authorized'
+      render plain: 'Error: Not Authorized'
     end
   end
 
@@ -87,7 +83,7 @@ class ProductCategoriesController < ApplicationController
       end
       redirect_to view_home_path
     else
-      render plain: 'Error: 404 Not Authorized'
+      render plain: 'Error: Not Authorized'
     end
   end
 
