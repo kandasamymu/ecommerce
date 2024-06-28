@@ -50,6 +50,8 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.assets.compile = true
+  config.assets.digest = true
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
@@ -63,7 +65,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.cache_store = :mem_cache_store, 'localhost', { pool_size: 10, pool_timeout: 5 }
+  config.cache_store = :mem_cache_store, 'localhost:11211', { pool_size: 10, pool_timeout: 5 }
   config.active_job.queue_adapter = :sidekiq
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }

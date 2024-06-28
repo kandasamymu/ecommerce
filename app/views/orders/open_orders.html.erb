@@ -14,10 +14,10 @@
           <p style="margin:5px; 0px; color: #656565;" >Customer: <%= order.user.first_name %></p>
         </div>
         <div class="row" style ="width: 500px;">
-          <p class ="Green-Text" style= "margin : 7px;font-weight: 600;"><%= order.order_status %></p>
+          <p class ="green-text" style= "margin : 7px;font-weight: 600;"><%= order.order_status %></p>
           <p style="margin:5px; 0px; color: #656565;" >&#8377; <%= order.order_products.map { |order_product| order_product.product_quantity * order_product.product_price }.sum %> </p>
           <% if order.order_status != AppConstants::ORDER_STAGES[5] %>
-            <%= form_tag request_change_order_stage_path, method: :PUT, :class => "margin_left-auto" do %>
+            <%= form_tag request_change_stage_order_path(order.id), method: :PUT, :class => "margin_left-auto" do %>
               <input type="hidden" name ="order_id" value=<%= order.id %> />
               <input type="hidden" name ="user_id" value=<%= order.user_id %> />
               <%= select_tag(:stage, options_for_select(enabled_stages, params[:stage]), { :class => "input_text-select input_text-select-small" }) %>

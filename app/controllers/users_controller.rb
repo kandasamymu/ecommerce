@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = 'User has been created successfully!'
-      redirect_to view_login_path
+      redirect_to view_login_sessions_path
     else
       render action: :index
     end

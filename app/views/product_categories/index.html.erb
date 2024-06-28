@@ -8,7 +8,7 @@
           <h2 class="section-title"><%= "#{t("header.welcome")} #{@current_user.first_name}!" %></h2>
           <% if !admin? %>
             <div style="margin-left:auto;">
-              <%= form_tag request_create_order_product_path, method: :post do %>
+              <%= form_tag request_create_orders_path, method: :post do %>
                 <input type="hidden" name="client_cart_products" id="client_cart_products" value ="" />
                 <button type="submit" class="button-small button-yellow" style="flex:"><%= t("products.check_out") %></button>
               <% end %>
@@ -16,7 +16,7 @@
           <% end %>
         </section>
         <div class="row ">
-          <h2  class="section-title Purple-Text"><%= t("products.product_list") %></h2>
+          <h2  class="section-title purple-text"><%= t("products.product_list") %></h2>
           <% if admin? %>
             <%= form_tag view_create_product_path, method: :GET, :remote => true do %>
               <button type="submit" class="button-small">Create Menu</button>
@@ -55,7 +55,7 @@
                 <div class ="sized-box"> </div>
                 <%= form_tag request_edit_product_category_path, method: :POST do %>
                   <input type="hidden" name ="menu_id" value=<%= product_category.id %> />
-                  <input id=<%= "#{product_category.id}_input" %> type="text" name="menu_name" class="section-category  Section_Category_input Green-Text hideElement" value="<%= product_category.name %>"  />
+                  <input id=<%= "#{product_category.id}_input" %> type="text" name="menu_name" class="section-category  section-category-input green-text hideElement" value="<%= product_category.name %>"  />
                   <input id=<%= "#{product_category.id}_save" %> type="submit" class="button-small hideElement" value="save" />
                   <input id=<%= "#{product_category.id}_cancel" %> type="button" class="button-small hideElement" value="cancel" data-id=<%= product_category.id %> onclick="changeInputToH2Tag(event)" />
                 <% end %>

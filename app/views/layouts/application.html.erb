@@ -14,7 +14,7 @@
       <%= link_to t("header.name"), view_home_path, class: "Header-title", data: { method: :get } %>
       <div style="flex: 3"></div>
       <% if admin? %>
-        <%= link_to t("header.create_users"), view_register_path, class: "header-signout", data: { method: :get } %>
+        <%= link_to t("header.create_users"), view_register_users_path, class: "header-signout", data: { method: :get } %>
       <% end %>
       <% if current_user && current_user.role == AppConstants::USER_TYPE_ADMIN %>
           <%= link_to t("header.open_orders"), view_admin_open_orders_path, class: "header-signout", data: { method: :get } %>
@@ -23,7 +23,7 @@
         <% if current_user.role == AppConstants::USER_TYPE_CUSTOMER %>
           <%= link_to t("header.my_orders"), view_orders_path, class: "header-signout", data: { method: :get } %>
         <% end %>
-        <%= link_to t("header.sign_out"), request_logout_path, class: "header-signout", data: { confirm: "Do you want to Signout?", method: :delete } %>
+        <%= link_to t("header.sign_out"), request_logout_sessions_path, class: "header-signout", data: { confirm: "Do you want to Signout?", method: :delete } %>
       <% end %>
     </section>
     <%= yield %>

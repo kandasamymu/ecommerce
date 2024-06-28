@@ -5,16 +5,37 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   mount Sidekiq::Web => '/sidekiq'
-  # resources :users
   # sign/signout routes
-  get 'sessions' => 'user_sessions#new', as: :view_login
-  post 'sessions/login' => 'user_sessions#create', as: :request_login
-  delete 'sessions/logout' => 'user_sessions#destroy', as: :request_logout
+  resources :sessions do
+    collection do
+      get '', to: 'user_sessions#new', as: :view_login
+      post 'login', to: 'user_sessions#create', as: :request_login
+      delete 'logout', to: 'user_sessions#destroy', as: :request_logout
+      # get 'logout', to: 'user_sessions#destroy', as: :request_logout
+    end
+  end
 
   # register routes
-  get 'user/register' => 'users#index', as: :view_register
-  # get "user" => "users#index", as: :view_register2
-  post 'user/register' => 'users#create', as: :request_register
+  resources :users do
+    collection do
+      get 'register', to: 'users#index', as: :view_register
+      # post 'register', to: 'users#create', as: :request_register
+      post 'register', to: 'users#create', as: :request_register
+    end
+  end
+
+  # order items routes
+  resources :orders do
+    collection do
+      get '', to: 'orders#index', as: :view
+      get 'open', to: 'orders#view_admin_open_orders', as: :view_admin_open
+      post 'item/new', to: 'orders#create', as: :request_create
+    end
+
+    member do
+      put 'change/stage', to: 'orders#change_order_status', as: :request_change_stage
+    end
+  end
 
   # home routes
   root to: 'home#index', as: :view_welcome
@@ -32,11 +53,6 @@ Rails.application.routes.draw do
   delete 'product/category/delete' => 'product_categories#destroy', as: :request_delete_product_category
   delete 'product/delete' => 'products#delete_product', as: :request_delete_product
 
-  # order items routes
-  get 'orders' => 'orders#index', as: :view_orders
-  get 'orders/open' => 'orders#view_admin_open_orders', as: :view_admin_open_orders
-  put 'orders/change/stage' => 'orders#change_order_status', as: :request_change_order_stage
-  post 'order/item/new' => 'orders#create_order', as: :request_create_order_product
 
   # check out routes
   get 'checkout/view' => 'check_out#index', as: :view_check_out

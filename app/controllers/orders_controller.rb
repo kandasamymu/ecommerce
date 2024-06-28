@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     render 'open_orders'
   end
 
-  def create_order
+  def create
     if params[:client_cart_products] != '' && params[:client_cart_products] != '{}'
       begin
         client_cart_products = ActiveSupport::JSON.decode(params[:client_cart_products])

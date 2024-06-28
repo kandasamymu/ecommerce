@@ -2,21 +2,21 @@
   <section class="Section">
     <div class="row ">
       <div class="column">
-        <h3  class="section-category Green-Text ">Stage: <%= order.order_status %></h3>
+        <h3  class="section-category green-text ">Stage: <%= order.order_status %></h3>
         <p class="Green-Text_Light" style ="margin:5px;font-size: 14px;" >Order Id: <%= order.id %></p>
       </div>
       <% if order.order_placed_date != nil %>
       <div class="column" style="margin-left: auto; margin-right: 20px;">
-        <p class="section-category Green-Text " style="margin:0px;">Order placed on:</p>
+        <p class="section-category green-text " style="margin:0px;">Order placed on:</p>
         <p class="Green-Text_Light" style="margin:4px auto; font-size: 14px;"><%= order.order_placed_date.strftime("%m/%d/%Y") %></p>
       </div>
       <% end %>
     </div>
     <table class="section-table">
       <tr class="Section_Products  ">
-        <td class=" Purple-Text" >Product Name</td>
-        <td class=" Purple-Text">Price</td>
-        <td class=" Purple-Text">Quantity</td>
+        <td class=" purple-text" >Product Name</td>
+        <td class=" purple-text">Price</td>
+        <td class=" purple-text">Quantity</td>
       </tr>
       <% order_products.each do |order_product| %>
         <tr class="Section_Products  Green-Text_Light">

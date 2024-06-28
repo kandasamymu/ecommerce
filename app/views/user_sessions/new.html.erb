@@ -1,5 +1,5 @@
 <article>
-  <%= form_tag request_login_path, method: :post, class: "Section" do %>
+  <%= form_tag request_login_sessions_path, method: :post, class: "Section" do %>
     <h2 class="section-title"> <%= t("home.sign_in") %></h2>
     <% if @user_session.errors.any? %>
     <div id="error_explanation">

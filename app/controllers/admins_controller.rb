@@ -4,7 +4,9 @@
 
 class AdminsController < ApplicationController
   def index
-    @users = User.where(role: 'customer')
+    @users = Rails.cache.fetch('customers', expires_in: 10.seconds) do
+      User.where(role: 'customer')
+    end
     'index'
   end
 end

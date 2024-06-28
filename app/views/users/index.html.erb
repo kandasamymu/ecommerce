@@ -1,5 +1,5 @@
 <article>
-  <%= form_tag request_register_path, method: :POST, class: "Section" do %>
+  <%= form_tag request_register_users_path, method: :POST, class: "Section" do %>
     <h2 class="section-title"><%= "#{t("header.welcome")}!!" %> <%= admin? ? "#{current_user.first_name}!! #{t("feature.create_new_user")}" : t("feature.register_here") %> </h2>
     <% if @user.errors.any? %>
     <div id="error_explanation">
