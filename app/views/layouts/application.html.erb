@@ -15,7 +15,7 @@
       <div style="flex: 3"></div>
       <% if admin? %>
         <%= link_to t("header.create_users"), view_register_users_path, class: "header-signout", data: { method: :get } %>
-        <%= link_to "Create Products", view_create_product_path, class: "header-signout", data: { method: :get } %>
+        <%= link_to "Create Product", view_create_product_path, class: "header-signout", data: { method: :get } %>
         <%= link_to t("header.open_orders"), view_admin_open_orders_path, class: "header-signout", data: { method: :get } %>
         <%= link_to "Product List", view_products_path, class: "header-signout", data: { method: :get } %>
       <% end %>

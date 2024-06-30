@@ -1,6 +1,6 @@
 <section class="Section">
   <% if @products && @products.size > 0 %>
-    <%= render partial: "product_list", locals: { products: @products } %>
+    <%= render partial: "product_list_section", locals: { products: @products } %>
   <% else %>
     <p>No results found!</p>
   <% end %>

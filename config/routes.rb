@@ -45,20 +45,13 @@ Rails.application.routes.draw do
   get 'product/new/view' => 'product_categories#create_product_view', as: :view_create_product
   post 'product/edit/view' => 'product_categories#edit_product_view', as: :view_edit_product
   post 'product/new' => 'products#create', as: :request_create_product
-  post 'product/update' => 'products#update_product', as: :request_edit_product
-
-  put 'products/search' => 'product_categories#search_product', as: :request_search_product
   get 'products' => 'products#index', as: :view_products
-  post 'product/category/edit' => 'product_categories#edit_product_category', as: :request_edit_product_category
-  delete 'product/category/delete' => 'product_categories#destroy', as: :request_delete_product_category
   delete 'product/delete' => 'products#delete_product', as: :request_delete_product
-
+  # Elastic search
+  put 'products/search' => 'product_categories#search_product', as: :request_search_product
 
   # check out routes
   get 'checkout/view' => 'check_out#index', as: :view_check_out
   post 'order/place' => 'check_out#place_order', as: :request_change_order_status
 
-  # Email Routes
-
-  get 'send/email' => 'admins#email_sender', as: :request_send_email_to_user
 end

@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    render "product_categories/_product_list"
+    render "product_categories/_product_list_section", locals: { products: @products }
   end
 
   def delete_product
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
           @product_category = ProductCategory.new(name: params[:new_product_category_name])
           unless @product_category.save
             flash[:Error] = 'Error: Issue in creating the product category!'
-            redirect_to view_home_path
+            redirect_to view_products_path
           end
         else
           @product_category = ProductCategory.find(product_category_id)
@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
       rescue StandardError => e
         flash[:Error] = e.message
       end
-      redirect_to view_home_path
+      redirect_to view_products_path
     else
       render plain: 'Error: Not Authorized'
     end

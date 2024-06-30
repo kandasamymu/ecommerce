@@ -50,22 +50,8 @@
           <section class="Section products_full_list">
             <div class="row row-bottom">
               <h3 id =<%= "#{product_category.id}_h2" %> class="Section_Category Green-Text "><%= product_category.name %></h3>
-              <% if admin? %>
-                <input id=<%= "#{product_category.id}_edit" %> type="image" src=<%= asset_path("edit-icon-1.png") %> data-id=<%= product_category.id %> onclick="changeh2toInputTag(event)" width="18" height="18">
-                <div class ="sized-box"> </div>
-                <%= form_tag request_edit_product_category_path, method: :POST do %>
-                  <input type="hidden" name ="menu_id" value=<%= product_category.id %> />
-                  <input id=<%= "#{product_category.id}_input" %> type="text" name="menu_name" class="section-category  section-category-input green-text hideElement" value="<%= product_category.name %>"  />
-                  <input id=<%= "#{product_category.id}_save" %> type="submit" class="button-small hideElement" value="save" />
-                  <input id=<%= "#{product_category.id}_cancel" %> type="button" class="button-small hideElement" value="cancel" data-id=<%= product_category.id %> onclick="changeInputToH2Tag(event)" />
-                <% end %>
-                <%= form_tag request_delete_product_category_path, method: :DELETE, data: { confirm: "Do you want to delete menu category?" } do %>
-                  <input type="hidden" name ="menu_id" value=<%= product_category.id %> />
-                  <input  type="image" src=<%= asset_path("trash-can.png") %>  width="12" height="12">
-                <% end %>
-              <% end %>
             </div>
-            <%= render partial: "product_list", locals: { products: product_category.products } %>
+            <%= render partial: "product_list_section", locals: { products: product_category.products } %>
           </section>
         <% end %>
       <% end %>

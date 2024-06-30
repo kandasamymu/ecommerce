@@ -6,8 +6,6 @@ class ProductCategoriesController < ApplicationController
   def index
     @product_category = ProductCategory.new
     @product = Product.new
-    puts "innnn222"
-    puts admin?
     @product_categories = Rails.cache.fetch(:product_categories) do
       ProductCategory.all.order(name: :asc)
     end

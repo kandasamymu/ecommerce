@@ -23,7 +23,7 @@ en:
   header:
     name: "Ecommerce"
     sign_out: "Sign Out"
-    create_users: "Create Users"
+    create_users: "Create Admin"
     my_orders: "Orders"
     open_orders: "Open Orders"
     welcome: "Welcome"
