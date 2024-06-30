@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get 'register', to: 'users#index', as: :view_register
-      # post 'register', to: 'users#create', as: :request_register
       post 'register', to: 'users#create', as: :request_register
     end
   end
@@ -48,7 +47,8 @@ Rails.application.routes.draw do
   post 'product/new' => 'products#create', as: :request_create_product
   post 'product/update' => 'products#update_product', as: :request_edit_product
 
-  put 'product/search' => 'product_categories#search_product', as: :request_search_product
+  put 'products/search' => 'product_categories#search_product', as: :request_search_product
+  get 'products' => 'products#index', as: :view_products
   post 'product/category/edit' => 'product_categories#edit_product_category', as: :request_edit_product_category
   delete 'product/category/delete' => 'product_categories#destroy', as: :request_delete_product_category
   delete 'product/delete' => 'products#delete_product', as: :request_delete_product

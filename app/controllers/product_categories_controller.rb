@@ -6,8 +6,10 @@ class ProductCategoriesController < ApplicationController
   def index
     @product_category = ProductCategory.new
     @product = Product.new
+    puts "innnn222"
+    puts admin?
     @product_categories = Rails.cache.fetch(:product_categories) do
-      Rails.cache.write(:product_categories, ProductCategory.all.order(name: :asc))
+      ProductCategory.all.order(name: :asc)
     end
 
     if admin?
@@ -15,7 +17,8 @@ class ProductCategoriesController < ApplicationController
     elsif current_user&.id
       render 'index'
     else
-      redirect_to view_welcome_path end
+      redirect_to view_welcome_path
+    end
   end
 
   def search_product
@@ -37,53 +40,6 @@ class ProductCategoriesController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-    end
-  end
-
-  def edit_product_view
-    @selected_product = Product.find(params[:product_id])
-    @selected_product_category_name = params[:product_category_name]
-    @product_categories = ProductCategory.all.order(name: :asc)
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def edit_product_category
-    if admin?
-      begin
-        @product_category = ProductCategory.find(params[:product_category_id])
-        @product_category.name = params[:menu_name]
-        if @product_category.save
-          flash[:notice] = 'Product category changes saved successfully!'
-        else
-          flash[:Error] = 'Error: Issue in creating the product category!'
-        end
-      rescue StandardError => e
-        flash[:Error] = e.message
-      end
-      redirect_to view_home_path
-    else
-      render plain: 'Error: Not Authorized'
-    end
-  end
-
-  def destroy
-    if admin?
-      begin
-        @product_category = ProductCategory.find(params[:product_category_id])
-        if @product_category.destroy
-          flash[:notice] = 'Product category deleted successfully!'
-        else
-          flash[:Error] = 'Error: Issue in deleting the product category!'
-        end
-      rescue StandardError => e
-        flash[:Error] = e.message
-      end
-      redirect_to view_home_path
-    else
-      render plain: 'Error: Not Authorized'
     end
   end
 

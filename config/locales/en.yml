@@ -25,7 +25,7 @@ en:
     sign_out: "Sign Out"
     create_users: "Create Users"
     my_orders: "Orders"
-    open_orders: "Open orders"
+    open_orders: "Open Orders"
     welcome: "Welcome"
   feature:
     create_new_user: "Create New User"

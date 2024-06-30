@@ -1,27 +1,10 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  def update_product
-    if admin?
-      begin
-        product = Product.find(params[:product_id])
-        product.name = params[:name]
-        product.price = params[:price]
-        product.description = params[:description]
-        product.product_category_id = params[:product_category_id]
 
-        if product.save
-          flash[:notice] = 'Product Updated Successfully'
-        else
-          flash[:Error] = 'Error occured in updating the product'
-        end
-      rescue StandardError => e
-        flash[:Error] = e.message
-      end
-    else
-      flash[:Error] = 'Error: Not Authorized'
-    end
-    redirect_to view_home_path
+  def index
+    @products = Product.all
+    render "product_categories/_product_list"
   end
 
   def delete_product
@@ -38,7 +21,7 @@ class ProductsController < ApplicationController
         flash[:Error] = e.message
         redirect_to view_home_path
       end
-      redirect_to view_home_path
+      redirect_to view_products_path
     else
       render plain: 'Error: Not Authorized'
     end

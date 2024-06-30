@@ -1,10 +1,10 @@
 function changeh2toInputTag(event){
-  var menu_id = event.target.dataset.id
-  h2 = document.getElementById(`${menu_id}_h2`)
-  menuInput = document.getElementById(`${menu_id}_input`)
-  editButton = document.getElementById(`${menu_id}_edit`)
-  saveButton = document.getElementById(`${menu_id}_save`)
-  cancelButton = document.getElementById(`${menu_id}_cancel`)
+  var product_id = event.target.dataset.id
+  h2 = document.getElementById(`${product_id}_h2`)
+  menuInput = document.getElementById(`${product_id}_input`)
+  editButton = document.getElementById(`${product_id}_edit`)
+  saveButton = document.getElementById(`${product_id}_save`)
+  cancelButton = document.getElementById(`${product_id}_cancel`)
 
   h2.classList.add("hideElement")
   editButton.classList.add("hideElement")
@@ -16,12 +16,12 @@ function changeh2toInputTag(event){
 }
 
 function changeInputToH2Tag(event){
-  var menu_id = event.target.dataset.id
-  h2 = document.getElementById(`${menu_id}_h2`)
-  menuInput = document.getElementById(`${menu_id}_input`)
-  editButton = document.getElementById(`${menu_id}_edit`)
-  saveButton = document.getElementById(`${menu_id}_save`)
-  cancelButton = document.getElementById(`${menu_id}_cancel`)
+  var product_id = event.target.dataset.id
+  h2 = document.getElementById(`${product_id}_h2`)
+  menuInput = document.getElementById(`${product_id}_input`)
+  editButton = document.getElementById(`${product_id}_edit`)
+  saveButton = document.getElementById(`${product_id}_save`)
+  cancelButton = document.getElementById(`${product_id}_cancel`)
 
   h2.classList.remove("hideElement")
   editButton.classList.remove("hideElement")
