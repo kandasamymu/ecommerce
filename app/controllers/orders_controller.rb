@@ -19,37 +19,18 @@ class OrdersController < ApplicationController
         client_cart_products = ActiveSupport::JSON.decode(params[:client_cart_products])
         product_ids = client_cart_products.keys
         order_id = nil
-
         if get_cart_orders_current_user&.first
           order_id = get_cart_orders_current_user.first.id
-        elsif current_user.orders.create(order_status: ORDER_STAGES[0]) && get_cart_orders_current_user && get_cart_orders_current_user.first
+          OrderProduct.where(order_id: order_id).destroy_all
+        else
+          current_user.orders.create(order_status: ORDER_STAGES[0])
           order_id = get_cart_orders_current_user.first.id
         end
-
-        existing_order_products_to_be_deleted = []
-        existing_order_products_to_be_updated = []
-        OrderProduct.where(product_id: product_ids, order_id: order_id).each do |order_product|
-          product_id = order_product.product_id.to_s
-          product_ids.delete(product_id)
-
-          if client_cart_products[product_id] && client_cart_products[product_id] != 0
-            order_product.product_quantity = client_cart_products[product_id]
-            existing_order_products_to_be_updated.push(order_product)
-          elsif (client_cart_products[product_id]).zero?
-            existing_order_products_to_be_deleted.push(order_product.id)
-          end
-        end
-
-        if existing_order_products_to_be_deleted.count != 0 && !OrderProduct.destroy_all(id: existing_order_products_to_be_deleted)
-          flash[:Error] = 'Error: In Deleted the Order Item'
-        end
-
-        if product_ids.count != 0 || existing_order_products_to_be_updated.count != 0
-          products = product_ids.count != 0 ? Product.where(id: product_ids) : []
-
+        if product_ids.count.positive?
+          products = Product.where(id: product_ids)
           unless order_id.nil?
             new_orders = products.map do |product|
-              order_product = OrderProduct.new(
+              OrderProduct.new(
                 order_id: order_id,
                 product_name: product.name,
                 product_id: product.id,
@@ -57,8 +38,6 @@ class OrdersController < ApplicationController
                 product_quantity: client_cart_products[product.id.to_s]
               )
             end
-
-            new_orders += existing_order_products_to_be_updated if existing_order_products_to_be_updated.count != 0
             save_failed = nil
             OrderProduct.transaction do
               new_orders.each do |order|
