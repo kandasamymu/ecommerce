@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  helper_method :get_enabled_stages
+  helper_method :get_next_stages
 
   def index
     @orders = get_all_orders_current_user
@@ -57,14 +57,14 @@ class OrdersController < ApplicationController
     redirect_to view_check_out_path
   end
 
-  def get_enabled_stages(stage)
-    enabled_stages = []
+  def get_next_stages(stage)
+    next_stages = []
     flag = false
     ORDER_STAGES.each do |curr_stage|
-      enabled_stages.push([curr_stage, curr_stage]) if flag
+      next_stages.push([curr_stage, curr_stage]) if flag
       flag = true if curr_stage == stage
     end
-    enabled_stages
+    next_stages
   end
 
   def change_order_status

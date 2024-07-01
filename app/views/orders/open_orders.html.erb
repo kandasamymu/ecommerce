@@ -5,7 +5,7 @@
       <p class=<%= className %>><%= msg %></p>
     <% end %>
     <% @orders.each do |order| %>
-    <% enabled_stages = get_enabled_stages(order.order_status) %>
+    <% enabled_stages = get_next_stages(order.order_status) %>
 
     <div class="row border-bottom"  >
       <div class="column ">

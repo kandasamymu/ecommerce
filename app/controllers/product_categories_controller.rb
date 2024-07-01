@@ -22,11 +22,9 @@ class ProductCategoriesController < ApplicationController
   def search_product
     search_term = params[:search_term]
     Rails.logger.debug search_term
-    Rails.logger.debug 'start'
     # @products = (Product.search query: { multi_match: { query: search_term, type: "phrase_prefix", fields: %w[name, description, price]} }).results
     @products = Product.search(search_term).results
     Rails.logger.debug @products.to_json
-    Rails.logger.debug 'end'
     respond_to do |format|
       format.html
       format.js

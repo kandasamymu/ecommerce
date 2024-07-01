@@ -10,11 +10,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    Rails.logger.debug '1111'
-    Rails.logger.debug user_params
     @user = User.new(user_params)
     @user.role = USER_TYPE_ADMIN
-
     @user.role = if user_params[:role] == USER_TYPE_ADMIN
                    user_params[:role]
                  else
