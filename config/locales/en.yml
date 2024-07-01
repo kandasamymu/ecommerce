@@ -28,7 +28,7 @@ en:
     open_orders: "Open Orders"
     welcome: "Welcome"
   feature:
-    create_new_user: "Create New User"
+    create_new_user: "Create New Admin"
     register_here: "Register Here"
     create: "Create"
   home:
@@ -37,8 +37,8 @@ en:
     already_have_account: "Existing User?"
     sign_in: "Sign In"
   products:
-    menu_list: "Menu List"
+    product_list: "Product List"
     search: "Search"
-    search_placeholder: "Search here"
+    search_placeholder: "Search..."
     check_out: "Check Out"
     add_to_cart: "Add to Cart"

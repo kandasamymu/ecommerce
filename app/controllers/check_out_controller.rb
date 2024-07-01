@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class CheckOutController < ApplicationController
-  helper_method :get_cart_order_products_with_calculated_price
+  helper_method :get_cart_order_products_with_price
 
   def index
-    get_cart_order_products_with_calculated_price
+    get_cart_order_products_with_price
     'index'
   end
 
@@ -30,14 +30,13 @@ class CheckOutController < ApplicationController
     redirect_to view_orders_path
   end
 
-  def get_cart_order_products_with_calculated_price
+  def get_cart_order_products_with_price
     if current_user
-      @get_cart_order_products_with_calculated_price = { 'total_price' => 0, 'order_products' => [] }
+      @get_cart_order_products_with_price = { 'total_price' => 0, 'order_products' => [] }
       if get_cart_orders_current_user&.first
         get_cart_orders_current_user.first.order_products.each do |order_product|
-          @get_cart_order_products_with_calculated_price['order_products'].push(order_product)
-          @get_cart_order_products_with_calculated_price['total_price'] =
-            @get_cart_order_products_with_calculated_price['total_price'] + (order_product.product_price * order_product.product_quantity)
+          @get_cart_order_products_with_price['order_products'].push(order_product)
+          @get_cart_order_products_with_price['total_price'] += (order_product.product_price * order_product.product_quantity)
         end
       end
     end

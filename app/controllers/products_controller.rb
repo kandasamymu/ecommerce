@@ -31,16 +31,7 @@ class ProductsController < ApplicationController
     if admin?
       begin
         product_category_id = params[:product_category_id]
-        Rails.logger.debug product_category_id
-        if product_category_id == 'Others'
-          @product_category = ProductCategory.new(name: params[:new_product_category_name])
-          unless @product_category.save
-            flash[:Error] = 'Error: Issue in creating the product category!'
-            redirect_to view_products_path
-          end
-        else
-          @product_category = ProductCategory.find(product_category_id)
-        end
+        @product_category = ProductCategory.find(product_category_id)
 
         if @product_category&.id
           @product = @product_category.products.new(name: params[:name], price: params[:price],

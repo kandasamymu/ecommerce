@@ -19,7 +19,7 @@
           <h2  class="section-title purple-text"><%= t("products.product_list") %></h2>
           <% if admin? %>
             <%= form_tag view_create_product_path, method: :GET, :remote => true do %>
-              <button type="submit" class="button-small">Create Menu</button>
+              <button type="submit" class="button-small">Create Products</button>
             <% end %>
           <% end %>
         </div>
