@@ -37,7 +37,7 @@ table.minimalistBlack tfoot td {
 <body>
 <article>
   <section class ="Section row">
-    <h2 class="section-title">My Cart!</h2>
+    <h2 class="section-title">My Cart Products!</h2>
   </section>
   <% if @get_cart_order_products_with_price["order_products"] != [] %>
     <table class="minimalistBlack">
@@ -65,7 +65,7 @@ table.minimalistBlack tfoot td {
       </tr>
     </table>
     <div class="row" style ="justify-content: flex-end;" >
-      <%= form_tag request_change_order_status_path, method: :post do %>
+      <%= form_tag request_place_order_path, method: :post do %>
         <input type="hidden" name="order_id" value ="<%= @get_cart_order_products_with_price["order_products"][0].order_id %>" />
         <button type="submit" class="button-small " style="flex:">Place Order</button>
       <% end %>

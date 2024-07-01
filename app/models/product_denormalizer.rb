@@ -8,24 +8,11 @@ class ProductDenormalizer
   end
 
   def to_hash
-    %w[id
-       name
-       price
-       description]
-      .map { |method_name| [method_name, send(method_name)] }.to_h
-  end
-
-  delegate :id, to: :product
-
-  delegate :name, to: :product
-
-  delegate :price, to: :product
-
-  delegate :description, to: :product
-
-  delegate :product_category_id, to: :product
-
-  def product_category
-    { id: product.product_category.id, name: product.product_category.name }
+    {
+      id: @product.id,
+      name: @product.name,
+      price: @product.price,
+      description: @product.description
+    }
   end
 end

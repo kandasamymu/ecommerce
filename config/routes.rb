@@ -52,6 +52,6 @@ Rails.application.routes.draw do
 
   # check out routes
   get 'checkout/view' => 'check_out#index', as: :view_check_out
-  post 'order/place' => 'check_out#place_order', as: :request_change_order_status
+  post 'order/place' => 'check_out#place_order', as: :request_place_order
 
 end
