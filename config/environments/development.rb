@@ -68,7 +68,7 @@ Rails.application.configure do
   config.cache_store = :mem_cache_store, 'localhost:11211', { pool_size: 10, pool_timeout: 5 }
   config.active_job.queue_adapter = :sidekiq
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',

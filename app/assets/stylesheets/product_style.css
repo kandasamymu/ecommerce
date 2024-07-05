@@ -6,8 +6,10 @@
 .section-table{
   margin-left: 10px;
   border-collapse: collapse;
-  width: 90%;
+  width: 40%;
 }
+
+
 .section-products{
   margin-top: 10px;
 }
@@ -48,4 +50,65 @@
 }
 .hideElement{
   display: none;
+}
+
+.product-details {
+  width: 50%;
+  vertical-align: top;
+}
+
+.product-price {
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/*checkout*/
+table.minimalistBlack {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.minimalistBlack td, table.minimalistBlack th {
+  padding: 5px 4px;
+}
+table.minimalistBlack tbody td {
+  font-size: 13px;
+  color: #000000;
+}
+table.minimalistBlack thead {
+  background: #e7e7e7;
+  border-bottom: 2px solid  rgb(112, 12, 112);
+
+}
+table.minimalistBlack thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(112, 12, 112);
+  text-align: left;
+}
+table.minimalistBlack tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(112, 12, 112);
+}
+table.minimalistBlack tfoot td {
+  font-size: 14px;
+}
+
+.button-continue-shopping {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  text-align: center;
+  text-decoration: none; /* Remove underline */
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.button-continue-shopping:hover {
+  background-color: #45a049; /* Darker green on hover */
 }

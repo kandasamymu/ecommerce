@@ -1,14 +1,14 @@
 
 <table class="section-table">
   <% products.each do |product| %>
-    <tr class="Section_Products  green-text-light">
-      <td>
+    <tr class="section-products  green-text-light">
+      <td class="product-details">
         <div>
           <%= product.name %><br/>
           <div class="section-description"><%= product.description %></div>
         </div>
       </td>
-      <td>: &#8377;<%= product.price %></td>
+      <td class="product-price">: &#8377;<%= product.price %></td>
       <% if admin? %>
         <td class="menu-action-button" >
           <%= form_tag request_delete_product_path, method: :DELETE do %>

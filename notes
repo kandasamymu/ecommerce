@@ -1,0 +1,12 @@
+Sample flow:
+
+Customer:
+User Signup
+User login -> products (home) -> search products-> add to cart -> make order (mail will be sent in background) and done
+
+Admin:
+Admin login
+Can create another admin
+Create products and remove products
+View open orders list -> Change order status for an order (mail will be sent in background to users)
+View Product list

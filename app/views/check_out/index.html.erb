@@ -1,40 +1,4 @@
-<html>
-<head>
-<style>
-table.minimalistBlack {
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-table.minimalistBlack td, table.minimalistBlack th {
-  padding: 5px 4px;
-}
-table.minimalistBlack tbody td {
-  font-size: 13px;
-  color: #000000;
-}
-table.minimalistBlack thead {
-  background: #e7e7e7;
-  border-bottom: 2px solid  rgb(112, 12, 112);
 
-}
-table.minimalistBlack thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: rgb(112, 12, 112);
-  text-align: left;
-}
-table.minimalistBlack tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: rgb(112, 12, 112);
-}
-table.minimalistBlack tfoot td {
-  font-size: 14px;
-}
-</style>
-</head>
-<body>
 <article>
   <section class ="Section row">
     <h2 class="section-title">My Cart Products!</h2>
@@ -72,6 +36,7 @@ table.minimalistBlack tfoot td {
     </div>
   <% else %>
     <p>Cart is empty!</p>
+    <%= link_to 'Continue Shopping', view_home_path, class: 'button-continue-shopping' %>
   <% end %>
 </article>
 </body>
