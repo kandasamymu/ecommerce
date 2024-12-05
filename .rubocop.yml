@@ -1,0 +1,22 @@
+# .rubocop.yml
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'bin/*'
+
+Rails:
+  Enabled: true
+
+Metrics/AbcSize:
+  Max: 200
+Metrics/MethodLength:
+  Max: 150
+
+Style/Documentation:
+  Enabled: true
+  Exclude:
+    - 'app/*/**/*.rb' # Exclude all controllers
